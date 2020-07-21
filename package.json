@@ -1,6 +1,6 @@
 {
   "name": "smart-tooltip",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "Intelligently show tooltip based on container position",
   "main": "index.js",
   "scripts": {

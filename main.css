@@ -1,217 +1,95 @@
-body {
-  margin: 0px;
-  padding: 0px;
-  height: calc(100vh);
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-}
-
 .smart-tooltip-container {
-  position: relative;
-  background: #E5C388;
-  padding: 10px;
-  border-radius: 4px;
-  border: none;
-  font-weight: bold;
-  color: white;
+        position: relative;
+        background: #e5c388;
+        padding: 10px;
+        border-radius: 4px;
+        border: none;
+        font-weight: bold;
+        color: white;
 }
 
-.smart-tooltip-container:hover .tooltip {
-  display: block;
+.smart-tooltip-container:hover .smart-tooltip {
+        display: block;
 }
 
-.tooltip {
-  position: absolute;
-  background-color: #333;
-  border-radius: 3px;
-  font-size: 10px;
-  color: #eee;
-  padding: 30px;
-  z-index: 100000;
-  top: 50%;
-  -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
-  left: 50%;
-  display: none;
+.smart-tooltip {
+        position: absolute;
+        background-color: #333;
+        border-radius: 3px;
+        font-size: 10px;
+        color: #eee;
+        padding: 30px;
+        z-index: 100000;
+        top: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        left: 50%;
+        display: none;
 }
 
-.tooltip.left-t {
-  position: absolute;
-  background-color: #333;
-  border-radius: 3px;
-  font-size: 10px;
-  color: #eee;
-  padding: 30px;
-  z-index: 100000;
-  top: 0;
-  -webkit-transform: none;
-          transform: none;
-  left: initial;
-  display: none;
-  right: calc(100% + 5px);
-  left: initial;
-  top: 5px;
-  bottom: initial;
-  transform: none;
+.smart-tooltip.left-t {
+        -webkit-transform: none;
+        transform: none;
+        right: calc(100% + 5px);
+        left: initial;
+        top: 5px;
+        bottom: initial;
 }
 
-.tooltip.left-b {
-  position: absolute;
-  background-color: #333;
-  border-radius: 3px;
-  font-size: 10px;
-  color: #eee;
-  padding: 30px;
-  z-index: 100000;
-  top: 0;
-  -webkit-transform: none;
-          transform: none;
-  left: initial;
-  display: none;
-  right: calc(100% + 5px);
-  left: initial;
-  top: initial;
-  bottom: 5px;
-  transform: none;
+.smart-tooltip.left-b {
+        -webkit-transform: none;
+        transform: none;
+        right: calc(100% + 5px);
+        left: initial;
+        top: initial;
+        bottom: 5px;
 }
 
-.tooltip.left {
-  position: absolute;
-  background-color: #333;
-  border-radius: 3px;
-  font-size: 10px;
-  color: #eee;
-  padding: 30px;
-  z-index: 100000;
-  top: 0;
-  -webkit-transform: none;
-          transform: none;
-  left: initial;
-  display: none;
-  right: calc(100% + 5px);
-  left: initial;
-  top: 50%;
-  -webkit-transform: translateY(-50%);
-          transform: translateY(-50%);
+.smart-tooltip.left {
+        right: calc(100% + 5px);
+        left: initial;
+        top: 50%;
+        -webkit-transform: translateY(-50%);
+        transform: translateY(-50%);
 }
 
-.tooltip.right-b {
-  position: absolute;
-  background-color: #333;
-  border-radius: 3px;
-  font-size: 10px;
-  color: #eee;
-  padding: 30px;
-  z-index: 100000;
-  top: 0;
-  -webkit-transform: none;
-          transform: none;
-  left: initial;
-  display: none;
-  left: calc(100% + 5px);
-  top: initial;
-  bottom: 5px;
-  transform: none;
+.smart-tooltip.right-b {
+        -webkit-transform: none;
+        transform: none;
+        display: none;
+        left: calc(100% + 5px);
+        top: initial;
+        bottom: 5px;
 }
 
-.tooltip.right-t {
-  position: absolute;
-  background-color: #333;
-  border-radius: 3px;
-  font-size: 10px;
-  color: #eee;
-  padding: 30px;
-  z-index: 100000;
-  top: 0;
-  -webkit-transform: none;
-          transform: none;
-  left: initial;
-  display: none;
-  left: calc(100% + 5px);
-  top: 5px;
-  bottom: initial;
-  transform: none;
+.smart-tooltip.right-t {
+        -webkit-transform: none;
+        transform: none;
+        left: calc(100% + 5px);
+        top: 5px;
+        right: initial;
+        bottom: initial;
 }
 
-.tooltip.right {
-  position: absolute;
-  background-color: #333;
-  border-radius: 3px;
-  font-size: 10px;
-  color: #eee;
-  padding: 30px;
-  z-index: 100000;
-  top: 0;
-  -webkit-transform: none;
-          transform: none;
-  left: initial;
-  display: none;
-  left: calc(100% + 5px);
-  top: 50%;
-  -webkit-transform: translateY(-50%);
-          transform: translateY(-50%);
+.smart-tooltip.right {
+        left: calc(100% + 5px);
+        top: 50%;
+        bottom: initial;
+        right: initial;
+        -webkit-transform: translateY(-50%);
+        transform: translateY(-50%);
 }
 
-.tooltip.bottom {
-  position: absolute;
-  background-color: #333;
-  border-radius: 3px;
-  font-size: 10px;
-  color: #eee;
-  padding: 30px;
-  z-index: 100000;
-  top: 0;
-  -webkit-transform: none;
-          transform: none;
-  left: initial;
-  display: none;
-  top: 120%;
-  left: 5%;
-  /*
-        &::after {
-            content: " ";
-            position: absolute;
-            bottom: 100%;
-            //At the top of the tooltip 
-            left: 50%;
-            margin-left: -5px;
-            border-width: 5px;
-            border-style: solid;
-            border-color: transparent transparent #333 transparent;
-        }*/
+.smart-tooltip.bottom {
+        display: none;
+        top: calc(100% + 5px);
+        left: 50%;
+        transform: translateX(-50%);
 }
 
-.tooltip.top {
-  position: absolute;
-  background-color: #333;
-  border-radius: 3px;
-  font-size: 10px;
-  color: #eee;
-  padding: 30px;
-  z-index: 100000;
-  top: 0;
-  -webkit-transform: none;
-          transform: none;
-  left: initial;
-  display: none;
-  bottom: 100%;
-  /*
-        &::after {
-            position: absolute;
-            content: "";
-            top: 100%; //to set the triangle at end
-            left: 10%; // left side moved 10% so it looks like tooltip
-            border-top: 5px solid #333;
-            border-right: 5px solid transparent;
-            border-bottom: 5px solid transparent;
-            border-left: 5px solid transparent;
-        }*/
+.smart-tooltip.top {
+        display: none;
+        bottom: calc(100% + 5px);
+        left: 50%;
+         transform: translateX(-50%);
 }
-/*# sourceMappingURL=main.css.map */
