@@ -1,0 +1,11 @@
+{
+  "name": "smart-tooltip",
+  "version": "1.0.0",
+  "description": "Intelligently show tooltip based on container position",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Justice Addico",
+  "license": "ISC"
+}

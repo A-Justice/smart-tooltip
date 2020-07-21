@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="main.css">
+    <title>Tool tip</title>
+</head>
+
+<body>
+
+    <button class="smart-tooltip-container btn1" onmouseover="myfunc()"> 
+                Button 
+        <span class="tooltip">Welcome</span>  
+    </button>
+    <button class="smart-tooltip-container btn2" onmouseover="myfunc()"> 
+            Button 
+            <span class="tooltip">Welcome</span>  
+    </button>
+    <button class="smart-tooltip-container btn3 " onmouseover="myfunc()"> 
+            Button 
+        <span class="tooltip">Welcome</span>  
+    </button>
+    <button class="smart-tooltip-container  btn4" onmouseover="myfunc()"> 
+            Button 
+        <span class="tooltip">Welcome</span>  
+        </button>
+</body>
+<script type="module">
+    import {smartTooltip} from "./index.js";
+
+    smartTooltip();
+</script>
+
+</html>
