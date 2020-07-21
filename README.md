@@ -1,7 +1,7 @@
-#What's this
+# What's this
 A package that allows you tooltip to show intelligently base on where it is
 
-#Installation
+# Installation
 
 `npm i smart-tooltip --save`
 
@@ -13,6 +13,6 @@ Then ...
     smartTooltip();
 ```
 
-##options
+## options
 smart-tooltip supports 2 options all of which are optional
 * *type* - _hard | soft_ (Defaults to soft)
