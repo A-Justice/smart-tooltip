@@ -16,7 +16,7 @@ Html (index.html)
     <link rel="stylesheet" href="node_modules/smart-tooltip/main.css">
 </head>
 <body>
-    <div class="smart-tooltip-container btn1" > 
+    <div class="smart-tooltip-container" > 
                 Button 
         <span class="smart-tooltip">Welcome</span>  
     </div>
@@ -49,7 +49,7 @@ Bundling with Parcel (optional)
 _ Apply class *stay-left | stay-right | stay-bottom | stay-top* _
 eg:
 ```
-    <div class="smart-tooltip-container btn1" > 
+    <div class="smart-tooltip-container" > 
                 Button 
         <span class="smart-tooltip stay-right">Welcome</span>  
     </div>
