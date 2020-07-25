@@ -41,7 +41,21 @@ Bundling with Parcel (optional)
 
 ```
 
+
+
+
 ## options
-* no options yes
+* Forcing tooltip to stay at particatular position 
+_ Apply class *stay-left | stay-right | stay-bottom | stay-top* _
+eg:
+```
+    <div class="smart-tooltip-container btn1" > 
+                Button 
+        <span class="smart-tooltip stay-right">Welcome</span>  
+    </div>
+```
+
+
+*Feel free to clone the github repo and inport main.css and index.js to your project
 <!-- smart-tooltip supports 2 options all of which are optional
 * *type * - _hard | soft_ (Defaults to soft) -->
