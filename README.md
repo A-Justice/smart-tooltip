@@ -45,7 +45,7 @@ Bundling with Parcel (optional)
 
 
 ## options
-* Forcing tooltip to stay at particatular position 
+* Forcing tooltip to stay at particular position 
 _ Apply class *stay-left | stay-right | stay-bottom | stay-top* _
 eg:
 ```
@@ -55,7 +55,7 @@ eg:
     </div>
 ```
 
-* Have you run into the trouble of having your tooltip cut because of a parent container displayed hidden? Dont worry, just add the class _overly_ eg:
+* Have you run into the trouble of having your tooltip cut because of a parent container displayed hidden? Dont worry, just add the class _overlay_ eg:
 
 
 ```
@@ -66,6 +66,6 @@ eg:
 ```
 
 
-*Feel free to clone the github repo and inport main.css and index.js to your project
+*Feel free to clone the github repo and import main.css and index.js to your project
 <!-- smart-tooltip supports 2 options all of which are optional
 * *type * - _hard | soft_ (Defaults to soft) -->
