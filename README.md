@@ -57,7 +57,6 @@ eg:
 
 * Have you run into the trouble of having your tooltip cut because of a parent container overflowed hidden? Dont worry, just add the class _overlay_ eg:
 
-
 ```
     <div class="smart-tooltip-container" > 
                 Button 
@@ -65,6 +64,7 @@ eg:
     </div>
 ```
 
+*NB: TO PREVENT TROUBLES WITH OVERLAY .. PLEASE SPECIFY DEFINITE WITDH FOR TOOLTIP
 
 *Feel free to clone the github repo and import main.css and index.js to your project
 <!-- smart-tooltip supports 2 options all of which are optional
