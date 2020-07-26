@@ -55,7 +55,7 @@ eg:
     </div>
 ```
 
-* Have you run into the trouble of having your tooltip cut because of a parent container displayed hidden? Dont worry, just add the class _overlay_ eg:
+* Have you run into the trouble of having your tooltip cut because of a parent container overflowed hidden? Dont worry, just add the class _overlay_ eg:
 
 
 ```
