@@ -2,12 +2,14 @@
 
 export const smartTooltip = function smartTooltip() {
     var btnArray = document.querySelectorAll(".smart-tooltip-container");
-    var body = document.querySelector("body");
+    //var body = document.querySelector("body");
     var classes = ["right", "right-t", "right-b", "left", "left-t", "left-b", "bottom", "bottom-r", "bottom-l", "top", "top-r", "top-l"];
 
     let offSetValue = 5;
 
-    var bodyclient = body.getClientRects()[0];
+    //var bodyclient = body.getClientRects()[0];
+
+    
 
     btnArray.forEach(element => {
         if (myfunc)
@@ -17,6 +19,8 @@ export const smartTooltip = function smartTooltip() {
     });
 
     function myfunc(event) {
+        let windowWidth = window.innerWidth;
+         let windowHeight = window.innerHeight;
         if (!event)
             return;
 
@@ -37,9 +41,9 @@ export const smartTooltip = function smartTooltip() {
 
         var spaces = {
             left: btnclient.left > tooltipclient.width,
-            right: (bodyclient.width - btnclient.right) > tooltipclient.width,
+            right: (windowWidth - btnclient.right) > tooltipclient.width,
             top: btnclient.top > tooltipclient.height,
-            bottom: (bodyclient.height - btnclient.bottom) > tooltipclient.height,
+            bottom: (windowHeight - btnclient.bottom) > tooltipclient.height,
             getSpace: function (key) {
                 let stayClass = getStayClass(tooltip);
                 // debugger;
@@ -58,7 +62,7 @@ export const smartTooltip = function smartTooltip() {
         if (spaces.getSpace("left")) {
 
             let topHalf = (btnclient.bottom - (btnclient.height / 2));
-            let bottomHalf = bodyclient.height - topHalf;
+            let bottomHalf = windowHeight - topHalf;
             let halfTooltip = (tooltipclient.height / 2);
 
             let isContainerBigger = btnclient.height >= tooltipclient.height;
@@ -82,7 +86,7 @@ export const smartTooltip = function smartTooltip() {
         } else if (spaces.getSpace("right")) {
 
             let topHalf = (btnclient.bottom - (btnclient.height / 2));
-            let bottomHalf = bodyclient.height - topHalf;
+            let bottomHalf = windowHeight - topHalf;
             let halfTooltip = (tooltipclient.height / 2);
 
             let isContainerBigger = btnclient.height >= tooltipclient.height;
@@ -104,7 +108,7 @@ export const smartTooltip = function smartTooltip() {
         } else if (spaces.getSpace("top")) {
 
             let leftHalf = (btnclient.right - (btnclient.width / 2));
-            let rightHalf = bodyclient.width - leftHalf;
+            let rightHalf = windowWidth - leftHalf;
             let halfTooltip = (tooltipclient.width / 2);
 
             let isContainerBigger = btnclient.width >= tooltipclient.width;
@@ -127,7 +131,7 @@ export const smartTooltip = function smartTooltip() {
         } else if (spaces.getSpace("bottom")) {
 
             let leftHalf = (btnclient.right - (btnclient.width / 2));
-            let rightHalf = bodyclient.width - leftHalf;
+            let rightHalf = windowWidth - leftHalf;
             let halfTooltip = (tooltipclient.width / 2);
 
             let isContainerBigger = btnclient.width >= tooltipclient.width;
@@ -245,7 +249,8 @@ export const smartTooltip = function smartTooltip() {
      * @param {string} tooltipPostion The position the tooltip should be displayed
      */
     function getOverlayCoordinates(btnclient,tooltipclient, tooltipPostion) {
-        console.log(tooltipPostion);
+        let windowWidth = window.innerWidth;
+         let windowHeight = window.innerHeight;
 
         if (tooltipPostion.includes("right")) {
             
@@ -256,7 +261,7 @@ export const smartTooltip = function smartTooltip() {
             }
 
             if (tooltipPostion == "right-t") {
-                overlayCoordinates.bottom = bodyclient.height - btnclient.bottom;
+                overlayCoordinates.bottom = windowHeight - btnclient.bottom;
                 overlayCoordinates.props = ["left","bottom"];
             } else if (tooltipPostion == "right-b") {
                 overlayCoordinates.top = btnclient.top + offSetValue;
@@ -269,13 +274,13 @@ export const smartTooltip = function smartTooltip() {
             console.log(tooltipclient.height);
             
             let overlayCoordinates = {
-                right: (bodyclient.width - btnclient.left) + offSetValue,
+                right: (windowWidth - btnclient.left) + offSetValue,
                 top: (btnclient.top + (btnclient.height/2)) - (tooltipclient.height/2),
                 props: ["right", "top"]
             }
 
             if (tooltipPostion == "left-t") {
-                overlayCoordinates.bottom = bodyclient.height - btnclient.bottom;
+                overlayCoordinates.bottom = windowHeight - btnclient.bottom;
                 overlayCoordinates.props = ["right","bottom"];
             } else if (tooltipPostion == "left-b") {
                 overlayCoordinates.top = btnclient.top + offSetValue;
@@ -286,12 +291,12 @@ export const smartTooltip = function smartTooltip() {
 
             let overlayCoordinates = {
                 left:(btnclient.right - (btnclient.width/2)) - (tooltipclient.width/2),
-                bottom: (bodyclient.height - btnclient.top) + offSetValue,
+                bottom: (windowHeight - btnclient.top) + offSetValue,
                 props: ["left","bottom"]
             }
 
             if (tooltipPostion == "top-l") {
-                overlayCoordinates.right = (bodyclient.width - btnclient.right) + offSetValue;
+                overlayCoordinates.right = (windowWidth - btnclient.right) + offSetValue;
                 overlayCoordinates.props = ["right","bottom"]
             } else if (tooltipPostion == "top-r") {
                 overlayCoordinates.left = btnclient.left + offSetValue;
@@ -307,7 +312,7 @@ export const smartTooltip = function smartTooltip() {
             }
 
             if (tooltipPostion == "bottom-l") {
-                overlayCoordinates.right = (bodyclient.width - btnclient.right) + offSetValue;
+                overlayCoordinates.right = (windowWidth - btnclient.right) + offSetValue;
                 overlayCoordinates.props = ["right","top"]
             } else if (tooltipPostion == "bottom-r") {
                 overlayCoordinates.left = btnclient.left + offSetValue;
