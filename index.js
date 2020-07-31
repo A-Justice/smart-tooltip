@@ -71,12 +71,12 @@ export const smartTooltip = function smartTooltip() {
                 if (!manipulateOverlayIfPresent(btnclient, tooltip, "left")) {
                     tooltip.classList.add('left');
                 }
-            } else if (topHalf < halfTooltip) {
+            } else if (topHalf <= halfTooltip) {
                 if (!manipulateOverlayIfPresent(btnclient, tooltip, "left-b")) {
                     tooltip.classList.add('left-b');
                 }
 
-            } else if (bottomHalf < halfTooltip) {
+            } else if (bottomHalf <= halfTooltip) {
                 if (!manipulateOverlayIfPresent(btnclient, tooltip, "left-t")) {
                     tooltip.classList.add('left-t');
                 }
@@ -95,11 +95,11 @@ export const smartTooltip = function smartTooltip() {
                 if (!manipulateOverlayIfPresent(btnclient, tooltip, "right")) {
                     tooltip.classList.add('right');
                 }
-            } else if (topHalf < halfTooltip) {
+            } else if (topHalf <= halfTooltip) {
                 if (!manipulateOverlayIfPresent(btnclient, tooltip, "right-b")) {
                     tooltip.classList.add('right-b');
                 }
-            } else if (bottomHalf < halfTooltip) {
+            } else if (bottomHalf <= halfTooltip) {
                 if (!manipulateOverlayIfPresent(btnclient, tooltip, "right-t")) {
                     tooltip.classList.add('right-t');
                 }
@@ -117,12 +117,12 @@ export const smartTooltip = function smartTooltip() {
                 if (!manipulateOverlayIfPresent(btnclient, tooltip, "top")) {
                     tooltip.classList.add('top');
                 }
-            } else if (leftHalf < halfTooltip) {
+            } else if (leftHalf <= halfTooltip) {
                 if (!manipulateOverlayIfPresent(btnclient, tooltip, "top-r")) {
                     tooltip.classList.add('top-r');
                 }
 
-            } else if (rightHalf < halfTooltip) {
+            } else if (rightHalf <= halfTooltip) {
                 if (!manipulateOverlayIfPresent(btnclient, tooltip, "top-l")) {
                     tooltip.classList.add('top-l');
                 }
@@ -143,12 +143,12 @@ export const smartTooltip = function smartTooltip() {
                     tooltip.classList.add('bottom');
                 }
 
-            } else if (leftHalf < halfTooltip) {
+            } else if (leftHalf <= halfTooltip) {
                 if (!manipulateOverlayIfPresent(btnclient, tooltip, "bottom-r")) {
                     tooltip.classList.add('bottom-r');
                 }
 
-            } else if (rightHalf < halfTooltip) {
+            } else if (rightHalf <= halfTooltip) {
                 if (!manipulateOverlayIfPresent(btnclient, tooltip, "bottom-l")) {
                     tooltip.classList.add('bottom-l');
                 }
@@ -163,8 +163,14 @@ export const smartTooltip = function smartTooltip() {
 
     }
 
+    /**
+     * Remove all classes associated with the tooltips position
+     * @param {ElementRef} tooltip The tooltip element
+     */
     function removeTooltipClass(tooltip) {
         let classList = tooltip.classList;
+        //search through a predefined classlist if tooltip has any on
+        //then remove it
         classList.forEach(element => {
             if (classes.includes(element)) {
                 classList.remove(element);
@@ -172,6 +178,11 @@ export const smartTooltip = function smartTooltip() {
         });
     }
 
+    /**
+     * Gets the position the element is supposed to stay if it has a stay class 
+     * eg. returns 'right' if stay-right class is present
+     * @param {HtmlElement} tooltip the tooltip element
+     */
     function getStayClass(tooltip) {
         var classList = tooltip.classList;
         let stayPosition;
@@ -183,9 +194,6 @@ export const smartTooltip = function smartTooltip() {
 
         return stayPosition;
     }
-
-
-
 
     function mouseLeft(event) {
         if (!event)
@@ -202,15 +210,12 @@ export const smartTooltip = function smartTooltip() {
 
             let tooltipRect = tooltip.getBoundingClientRect();
 
-
             //Reset Inline Styles
             tooltip.style.position = "";
             tooltip.style.top = "";
             tooltip.style.left = "";
             tooltip.style.bottom = "";
             tooltip.style.right = "";
-
-           
 
             tooltip.classList.add("overlay");
         }
@@ -324,6 +329,7 @@ export const smartTooltip = function smartTooltip() {
 
     /**
      * Checks for overlay class and manipulate it
+     * Responsible for assigning the position if overlay class is detected on the element
      * @param {any} tooltip the tooltip element
      * @param {string} position the string that show which side the tooltip is
      */

@@ -21,7 +21,7 @@
         transform: translate(-50%, -50%);
         left: 50%;
         visibility: collapse;
-        transition: all .2s;
+        /* transition: all .2s; */
         opacity: 0;
         outline: none;
 }
