@@ -9,18 +9,48 @@ export const smartTooltip = function smartTooltip() {
 
     //var bodyclient = body.getClientRects()[0];
 
-    
+
 
     btnArray.forEach(element => {
         if (myfunc)
             element.addEventListener("mouseover", myfunc);
 
         element.addEventListener("mouseleave", mouseLeft);
+
+        let tooltip = element.querySelector(".smart-tooltip");
+        //Assign tabIndex to allow element to be focusable
+        tooltip.tabIndex = 1;
+
+        tooltip.addEventListener("blur",(event)=>{
+            toolTipBlured(event.target);
+        });
+
     });
+
+    function toolTipBlured(tooltip){
+        if (removeOverlayClass(tooltip)) {
+    
+            let tooltipRect = tooltip.getBoundingClientRect();
+
+            //Reset Inline Styles
+            tooltip.style.position = "";
+            tooltip.style.top = "";
+            tooltip.style.left = "";
+            tooltip.style.bottom = "";
+            tooltip.style.right = "";
+
+            tooltip.classList.add("overlay");
+        }
+
+        tooltip.style.visibility = "collapse"
+        tooltip.style.opacity = "0";
+        tooltip.style.display = "none";
+    }
+
 
     function myfunc(event) {
         let windowWidth = window.innerWidth;
-         let windowHeight = window.innerHeight;
+        let windowHeight = window.innerHeight;
         if (!event)
             return;
 
@@ -37,7 +67,7 @@ export const smartTooltip = function smartTooltip() {
 
         var tooltipclient = tooltip.getBoundingClientRect();
         var btnclient = btn.getBoundingClientRect();
-        
+
 
         var spaces = {
             left: btnclient.left > tooltipclient.width,
@@ -136,7 +166,7 @@ export const smartTooltip = function smartTooltip() {
 
             let isContainerBigger = btnclient.width >= tooltipclient.width;
 
-           
+
 
             if (isContainerBigger || ((leftHalf > halfTooltip) && (rightHalf > halfTooltip))) {
                 if (!manipulateOverlayIfPresent(btnclient, tooltip, "bottom")) {
@@ -206,24 +236,40 @@ export const smartTooltip = function smartTooltip() {
 
         if (!tooltip) return;
 
-        if (removeOverlayClass(tooltip)) {
 
-            let tooltipRect = tooltip.getBoundingClientRect();
 
-            //Reset Inline Styles
-            tooltip.style.position = "";
-            tooltip.style.top = "";
-            tooltip.style.left = "";
-            tooltip.style.bottom = "";
-            tooltip.style.right = "";
+        //Make sure its not visible after mouse has left
 
-            tooltip.classList.add("overlay");
+        var stickyTime = getStickyTime(tooltip);
+
+        if(!isNaN(stickyTime)){
+            setTimeout(() => {
+
+                if (removeOverlayClass(tooltip)) {
+    
+                    let tooltipRect = tooltip.getBoundingClientRect();
+    
+                    //Reset Inline Styles
+                    tooltip.style.position = "";
+                    tooltip.style.top = "";
+                    tooltip.style.left = "";
+                    tooltip.style.bottom = "";
+                    tooltip.style.right = "";
+    
+                    tooltip.classList.add("overlay");
+                }
+    
+                tooltip.style.visibility = "collapse"
+                tooltip.style.opacity = "0";
+                tooltip.style.display = "none";
+    
+            }, stickyTime);
+        }else{
+            tooltip.focus();
         }
+        
 
-         //Make sure its not visible after mouse has left
-         tooltip.style.visibility = "collapse"
-         tooltip.style.opacity = "0";
-         tooltip.style.display = "none";
+
     }
 
     function removeOverlayClass(tooltip) {
@@ -253,72 +299,72 @@ export const smartTooltip = function smartTooltip() {
      * @param {DOMClientRect} btnclient The Rectangle that defines the button element
      * @param {string} tooltipPostion The position the tooltip should be displayed
      */
-    function getOverlayCoordinates(btnclient,tooltipclient, tooltipPostion) {
+    function getOverlayCoordinates(btnclient, tooltipclient, tooltipPostion) {
         let windowWidth = window.innerWidth;
-         let windowHeight = window.innerHeight;
+        let windowHeight = window.innerHeight;
 
         if (tooltipPostion.includes("right")) {
-            
+
             let overlayCoordinates = {
                 left: btnclient.right + offSetValue,
-                top: (btnclient.top + (btnclient.height/2)) - (tooltipclient.height/2),
+                top: (btnclient.top + (btnclient.height / 2)) - (tooltipclient.height / 2),
                 props: ["left", "top"]
             }
 
             if (tooltipPostion == "right-t") {
                 overlayCoordinates.bottom = windowHeight - btnclient.bottom;
-                overlayCoordinates.props = ["left","bottom"];
+                overlayCoordinates.props = ["left", "bottom"];
             } else if (tooltipPostion == "right-b") {
                 overlayCoordinates.top = btnclient.top + offSetValue;
             }
 
             return overlayCoordinates;
-        }else if (tooltipPostion.includes("left")) {
+        } else if (tooltipPostion.includes("left")) {
 
 
             console.log(tooltipclient.height);
-            
+
             let overlayCoordinates = {
                 right: (windowWidth - btnclient.left) + offSetValue,
-                top: (btnclient.top + (btnclient.height/2)) - (tooltipclient.height/2),
+                top: (btnclient.top + (btnclient.height / 2)) - (tooltipclient.height / 2),
                 props: ["right", "top"]
             }
 
             if (tooltipPostion == "left-t") {
                 overlayCoordinates.bottom = windowHeight - btnclient.bottom;
-                overlayCoordinates.props = ["right","bottom"];
+                overlayCoordinates.props = ["right", "bottom"];
             } else if (tooltipPostion == "left-b") {
                 overlayCoordinates.top = btnclient.top + offSetValue;
             }
 
             return overlayCoordinates;
-        }else if (tooltipPostion.includes("top")) {
+        } else if (tooltipPostion.includes("top")) {
 
             let overlayCoordinates = {
-                left:(btnclient.right - (btnclient.width/2)) - (tooltipclient.width/2),
+                left: (btnclient.right - (btnclient.width / 2)) - (tooltipclient.width / 2),
                 bottom: (windowHeight - btnclient.top) + offSetValue,
-                props: ["left","bottom"]
+                props: ["left", "bottom"]
             }
 
             if (tooltipPostion == "top-l") {
                 overlayCoordinates.right = (windowWidth - btnclient.right) + offSetValue;
-                overlayCoordinates.props = ["right","bottom"]
+                overlayCoordinates.props = ["right", "bottom"]
             } else if (tooltipPostion == "top-r") {
                 overlayCoordinates.left = btnclient.left + offSetValue;
             }
 
             return overlayCoordinates;
-        }else if (tooltipPostion.includes("bottom")) {
+        } else if (tooltipPostion.includes("bottom")) {
 
             let overlayCoordinates = {
-                left:(btnclient.right - (btnclient.width/2)) - (tooltipclient.width/2),
+                left: (btnclient.right - (btnclient.width / 2)) - (tooltipclient.width / 2),
                 top: btnclient.bottom + offSetValue,
-                props: ["left","top"]
+                props: ["left", "top"]
             }
 
             if (tooltipPostion == "bottom-l") {
                 overlayCoordinates.right = (windowWidth - btnclient.right) + offSetValue;
-                overlayCoordinates.props = ["right","top"]
+                overlayCoordinates.props = ["right", "top"]
             } else if (tooltipPostion == "bottom-r") {
                 overlayCoordinates.left = btnclient.left + offSetValue;
             }
@@ -339,19 +385,19 @@ export const smartTooltip = function smartTooltip() {
         //debugger;
         if (removeOverlayMarkClass(tooltip)) {
 
-           // debugger;
+            // debugger;
             //Get the overlay coordinates
-            let overlayCoordinates = getOverlayCoordinates(btnBClientRect,tooltip.getBoundingClientRect(), tooltipPosition);
+            let overlayCoordinates = getOverlayCoordinates(btnBClientRect, tooltip.getBoundingClientRect(), tooltipPosition);
 
             //Get the set properties base the tooltip position based on the tooltipPosition
 
             //Overlay styles to tooltip control
             tooltip.style.position = "fixed";
 
-            for(let prop of overlayCoordinates.props){
+            for (let prop of overlayCoordinates.props) {
                 tooltip.style[prop] = overlayCoordinates[prop] + "px";
             }
-            
+
 
             //Add the actual overlayed class which resets old styles
             tooltip.classList.add("overlayed");
@@ -360,6 +406,32 @@ export const smartTooltip = function smartTooltip() {
         }
 
         return false;
+    }
+
+
+    /**
+     * Get the sticky time on the tooltip or returns zero if none is found
+     * @param {HtmlElement} tooltip The tooltip element
+     */
+    function getStickyTime(tooltip) {
+
+        try {
+            for (let item of tooltip.classList) {
+                if (item.includes("stick")) {
+                    if(item.includes("-")){
+                        let numberstring = item.split("-")[1];
+                        return +numberstring;
+                    }else{
+                       return Number.NaN;
+                    }
+                }
+            }
+        } catch{
+            return 0;
+        }
+
+        //return zero if tooltip doesn't have a sticky class
+        return 0;
     }
 
 }

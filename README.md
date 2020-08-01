@@ -64,7 +64,22 @@ eg:
     </div>
 ```
 
-*NB: TO PREVENT TROUBLES WITH OVERLAY .. PLEASE SPECIFY DEFINITE WITDH FOR TOOLTIP
+
+* Do you want the tooltip stick around for a while...?
+    Add the stick class with the time in milliseconds (stick-100) you want it to stay.
+    ```
+     <button class="smart-tooltip-container">
+            Button 
+            <span class="smart-tooltip overlay stick-200">Tooltip</span>
+        </button>
+    ```
+    Or may be you want to tooltip to stick around until you click anywhere else .. in that case just add the stick class eg:
+    ```
+     <button class="smart-tooltip-container">
+            Button 
+            <span class="smart-tooltip overlay stick">Tooltip</span>
+        </button>
+    ```
 
 *Feel free to clone the github repo and import main.css and index.js to your project
 <!-- smart-tooltip supports 2 options all of which are optional
