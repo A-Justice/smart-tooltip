@@ -64,6 +64,7 @@ eg:
 ```
 
 *NB: TO PREVENT TROUBLES WITH OVERLAY .. PLEASE SPECIFY DEFINITE WITDH FOR TOOLTIP*
+_NOTE: The Tooltip overlay will not work in a parent with transfrom property yet because of how css works (fixed position and transformed parent)... working on a fix for that soon_
 
 * Do you want the tooltip stick around for a while...?
     Add the stick class with the time in milliseconds (stick-100) you want it to stay.
@@ -82,5 +83,7 @@ eg:
     ```
 
 *Feel free to clone the github repo and import main.css and index.js to your project
+
+
 <!-- smart-tooltip supports 2 options all of which are optional
 * *type * - _hard | soft_ (Defaults to soft) -->
