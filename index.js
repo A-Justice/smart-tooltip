@@ -7,6 +7,8 @@ export const smartTooltip = function smartTooltip() {
 
     let offSetValue = 5;
 
+    let isTooltipHovered = false;
+
     //var bodyclient = body.getClientRects()[0];
 
 
@@ -21,15 +23,24 @@ export const smartTooltip = function smartTooltip() {
         //Assign tabIndex to allow element to be focusable
         tooltip.tabIndex = 1;
 
-        tooltip.addEventListener("blur",(event)=>{
+        tooltip.addEventListener("blur", (event) => {
             toolTipBlured(event.target);
         });
 
+        tooltip.addEventListener("mouseleave", (event) => {
+            tooltipMouseLeft(event.target);
+        });
+
+        tooltip.addEventListener("mouseenter", (event) => {
+            tooltipMouseEnter(event.target);
+        });
+
+
     });
 
-    function toolTipBlured(tooltip){
+    function toolTipBlured(tooltip) {
         if (removeOverlayClass(tooltip)) {
-    
+
             let tooltipRect = tooltip.getBoundingClientRect();
 
             //Reset Inline Styles
@@ -49,6 +60,8 @@ export const smartTooltip = function smartTooltip() {
 
 
     function myfunc(event) {
+        
+        console.log("Button Mouse Entered");
         let windowWidth = window.innerWidth;
         let windowHeight = window.innerHeight;
         if (!event)
@@ -226,6 +239,10 @@ export const smartTooltip = function smartTooltip() {
     }
 
     function mouseLeft(event) {
+
+       
+
+        console.log("Button Mouse Left");
         if (!event)
             return;
 
@@ -242,32 +259,38 @@ export const smartTooltip = function smartTooltip() {
 
         var stickyTime = getStickyTime(tooltip);
 
-        if(!isNaN(stickyTime)){
+        if (!isNaN(stickyTime)) {
             setTimeout(() => {
 
+                if (isTooltipHovered)
+                    return;
+
                 if (removeOverlayClass(tooltip)) {
-    
+
                     let tooltipRect = tooltip.getBoundingClientRect();
-    
+
                     //Reset Inline Styles
                     tooltip.style.position = "";
                     tooltip.style.top = "";
                     tooltip.style.left = "";
                     tooltip.style.bottom = "";
                     tooltip.style.right = "";
-    
+
                     tooltip.classList.add("overlay");
                 }
-    
+
                 tooltip.style.visibility = "collapse"
                 tooltip.style.opacity = "0";
                 tooltip.style.display = "none";
-    
+
+                
+
             }, stickyTime);
-        }else{
+        } else {
             tooltip.focus();
+            
         }
-        
+
 
 
     }
@@ -418,11 +441,11 @@ export const smartTooltip = function smartTooltip() {
         try {
             for (let item of tooltip.classList) {
                 if (item.includes("stick")) {
-                    if(item.includes("-")){
+                    if (item.includes("-")) {
                         let numberstring = item.split("-")[1];
                         return +numberstring;
-                    }else{
-                       return Number.NaN;
+                    } else {
+                        return Number.NaN;
                     }
                 }
             }
@@ -434,6 +457,20 @@ export const smartTooltip = function smartTooltip() {
         return 0;
     }
 
+    function tooltipMouseLeft(tooltip) {
+        isTooltipHovered = false;
+        if (!isNaN(getStickyTime(tooltip))) {
+            tooltip.blur();
+        }
+
+        console.log("tooltip Left");
+    }
+
+    function tooltipMouseEnter(tooltip) {
+        isTooltipHovered = true;
+        tooltip.focus();
+        console.log("tooltip Entered");
+    }
 }
 
 
