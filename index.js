@@ -2,22 +2,26 @@
 
 export const smartTooltip = function smartTooltip() {
     var btnArray = document.querySelectorAll(".smart-tooltip-container");
-    //var body = document.querySelector("body");
+
     var classes = ["right", "right-t", "right-b", "left", "left-t", "left-b", "bottom", "bottom-r", "bottom-l", "top", "top-r", "top-l"];
 
     let offSetValue = 5;
 
-    let isTooltipHovered = false;
-
-    //var bodyclient = body.getClientRects()[0];
-
-
-
     btnArray.forEach(element => {
-        if (myfunc)
-            element.addEventListener("mouseover", myfunc);
 
-        element.addEventListener("mouseleave", mouseLeft);
+        var mouseLeftTimeOut = {
+            timeout : 1
+        };
+
+        if (myfunc){
+            element.addEventListener("mouseover", (event)=>{
+                myfunc(event,mouseLeftTimeOut)
+            });
+        }
+        
+        element.addEventListener("mouseleave", (event)=>{
+            mouseLeft(event,mouseLeftTimeOut)
+        });
 
         let tooltip = element.querySelector(".smart-tooltip");
         //Assign tabIndex to allow element to be focusable
@@ -59,9 +63,11 @@ export const smartTooltip = function smartTooltip() {
     }
 
 
-    function myfunc(event) {
-        
-        console.log("Button Mouse Entered");
+    function myfunc(event,mouseLeftTimeOut) {
+
+        //console.log("Button Mouse Entered");
+        clearTimeout(mouseLeftTimeOut.timeout);
+        //console.log(mouseLeftTimeOut.timeout);
         let windowWidth = window.innerWidth;
         let windowHeight = window.innerHeight;
         if (!event)
@@ -238,11 +244,11 @@ export const smartTooltip = function smartTooltip() {
         return stayPosition;
     }
 
-    function mouseLeft(event) {
+    function mouseLeft(event,mouseLeftTimeOut) {
 
-       
 
-        console.log("Button Mouse Left");
+
+        //console.log("Button Mouse Left");
         if (!event)
             return;
 
@@ -260,9 +266,9 @@ export const smartTooltip = function smartTooltip() {
         var stickyTime = getStickyTime(tooltip);
 
         if (!isNaN(stickyTime)) {
-            setTimeout(() => {
+            mouseLeftTimeOut.timeout = setTimeout(() => {
 
-                if (isTooltipHovered)
+                if (tooltip.classList.contains("hovered"))
                     return;
 
                 if (removeOverlayClass(tooltip)) {
@@ -283,12 +289,13 @@ export const smartTooltip = function smartTooltip() {
                 tooltip.style.opacity = "0";
                 tooltip.style.display = "none";
 
-                
+
 
             }, stickyTime);
+            //console.log(mouseLeftTimeOut);
         } else {
             tooltip.focus();
-            
+
         }
 
 
@@ -345,7 +352,7 @@ export const smartTooltip = function smartTooltip() {
         } else if (tooltipPostion.includes("left")) {
 
 
-            console.log(tooltipclient.height);
+            //console.log(tooltipclient.height);
 
             let overlayCoordinates = {
                 right: (windowWidth - btnclient.left) + offSetValue,
@@ -431,7 +438,6 @@ export const smartTooltip = function smartTooltip() {
         return false;
     }
 
-
     /**
      * Get the sticky time on the tooltip or returns zero if none is found
      * @param {HtmlElement} tooltip The tooltip element
@@ -458,19 +464,27 @@ export const smartTooltip = function smartTooltip() {
     }
 
     function tooltipMouseLeft(tooltip) {
-        isTooltipHovered = false;
-        if (!isNaN(getStickyTime(tooltip))) {
-            tooltip.blur();
-        }
+        if (tooltip.classList.contains('hovered')) {
 
-        console.log("tooltip Left");
+            if (!isNaN(getStickyTime(tooltip))) {
+                tooltip.classList.add("stayonhover");
+                tooltip.classList.remove('hovered');
+                //console.log("blured");
+                //tooltip.blur();
+            }
+        }
     }
 
     function tooltipMouseEnter(tooltip) {
-        isTooltipHovered = true;
-        tooltip.focus();
-        console.log("tooltip Entered");
+        if (tooltip.classList.contains('stayonhover')) {
+            if (!isNaN(getStickyTime(tooltip))) {
+                tooltip.classList.remove("stayonhover");
+                tooltip.classList.add('hovered');
+                //tooltip.focus();
+            }
+        }
     }
+
 }
 
 

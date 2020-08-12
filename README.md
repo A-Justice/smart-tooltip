@@ -75,11 +75,23 @@ _NOTE: The Tooltip overlay will not work in a parent with transfrom property yet
         </button>
     ```
     Or may be you want to tooltip to stick around until you click anywhere else .. in that case just add the stick class eg:
+
     ```
      <button class="smart-tooltip-container">
             Button 
             <span class="smart-tooltip overlay stick">Tooltip</span>
         </button>
+    ```
+
+    *Force the tooltip to stay on Hover Even if stick time has expired,
+    add 'stayonhover' class
+    NB: Stay on hover works well when the "stick" or "stick-*" class is used*
+
+    ```
+     <div class="smart-tooltip-container">
+            Button 
+            <span class="smart-tooltip stay-bottom overlay stick-2000 stayonhover">Tooltip</span>
+        </div>
     ```
 
 *Feel free to clone the github repo and import main.css and index.js to your project
