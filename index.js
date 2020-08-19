@@ -14,9 +14,19 @@ export const smartTooltip = function smartTooltip() {
         };
 
         if (myfunc){
-            element.addEventListener("mouseover", (event)=>{
-                myfunc(event,mouseLeftTimeOut)
-            });
+            console.log(element.classList);
+            if(element.classList.contains("clicktoshow")){
+                let tooltip = element.querySelector(".smart-tooltip");
+                tooltip.classList.add("stick");
+                element.addEventListener("click", (event)=>{
+                    myfunc(event,mouseLeftTimeOut)
+                });
+            }else{
+                element.addEventListener("mouseover", (event)=>{
+                    myfunc(event,mouseLeftTimeOut)
+                });
+            }
+            
         }
         
         element.addEventListener("mouseleave", (event)=>{
@@ -65,7 +75,7 @@ export const smartTooltip = function smartTooltip() {
 
     function myfunc(event,mouseLeftTimeOut) {
 
-        //console.log("Button Mouse Entered");
+        //clear the timeout that was started by the mouse leave event
         clearTimeout(mouseLeftTimeOut.timeout);
         //console.log(mouseLeftTimeOut.timeout);
         let windowWidth = window.innerWidth;

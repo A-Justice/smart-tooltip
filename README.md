@@ -7,6 +7,8 @@ A package that allows you tooltip to show intelligently base on where it is
 
 `optionally run npm init -y`
 
+`Make sure your plugin is always up to date for more stability`  
+
 # Bundling your app
 
 Html (index.html)
@@ -93,6 +95,17 @@ _NOTE: The Tooltip overlay will not work in a parent with transfrom property yet
             <span class="smart-tooltip stay-bottom overlay stick-2000 stayonhover">Tooltip</span>
         </div>
     ```
+
+
+
+
+* You can also use smart-tooltip as a dropdown.. just add the 'clicktoshow' class to the smart-tooltip-container.
+```
+     <button class="smart-tooltip-container clicktoshow">
+            Button 
+            <span class="smart-tooltip overlay">Tooltip</span>
+        </button>
+```
 
 *Feel free to clone the github repo and import main.css and index.js to your project
 
